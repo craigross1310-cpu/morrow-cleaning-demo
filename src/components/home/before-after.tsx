@@ -1,6 +1,6 @@
 "use client";
 
-import Image from "next/image";
+import { Photo } from "@/components/ui/photo";
 import { motion } from "motion/react";
 import { MoveHorizontal } from "lucide-react";
 import { useCallback, useRef, useState } from "react";
@@ -63,7 +63,7 @@ export function BeforeAfter() {
             onPointerUp={() => setDragging(false)}
             onPointerCancel={() => setDragging(false)}
           >
-            <Image
+            <Photo
               src="/images/kitchen-after.jpg"
               alt="The same kitchen after a Morrow deep clean — bright, spotless surfaces"
               fill
@@ -72,7 +72,7 @@ export function BeforeAfter() {
               draggable={false}
             />
             <div className="pointer-events-none absolute inset-0" style={{ clipPath: `inset(0 ${100 - pos}% 0 0)` }}>
-              <Image
+              <Photo
                 src="/images/kitchen-before.jpg"
                 alt="A kitchen before cleaning — dull, greasy and marked surfaces"
                 fill

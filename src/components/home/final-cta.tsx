@@ -1,4 +1,4 @@
-import Image from "next/image";
+import { Photo } from "@/components/ui/photo";
 import { ArrowRight, Clock, ShieldCheck, Sparkles } from "lucide-react";
 import { ButtonLink } from "@/components/ui/button";
 import { Reveal } from "@/components/ui/reveal";
@@ -28,7 +28,7 @@ export function FinalCTA() {
               </ul>
             </div>
             <div className="relative min-h-[18rem] lg:min-h-full">
-              <Image
+              <Photo
                 src="/images/bedroom.jpg"
                 alt="A serene, freshly cleaned bedroom with crisp white linen"
                 fill

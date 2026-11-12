@@ -38,13 +38,13 @@ export function Footer() {
           <ul className="mt-5 space-y-3 text-sm">
             {NAV_LINKS.map((l) => (
               <li key={l.href}>
-                <Link href={l.href} className="transition-colors hover:text-mustard">
+                <Link prefetch={false} href={l.href} className="transition-colors hover:text-mustard">
                   {l.label}
                 </Link>
               </li>
             ))}
             <li>
-              <Link href="/#quote" className="transition-colors hover:text-mustard">
+              <Link prefetch={false} href="/#quote" className="transition-colors hover:text-mustard">
                 Instant quote
               </Link>
             </li>
@@ -56,7 +56,7 @@ export function Footer() {
           <ul className="mt-5 space-y-3 text-sm">
             {SERVICES.map((s) => (
               <li key={s.id}>
-                <Link href="/#services" className="transition-colors hover:text-mustard">
+                <Link prefetch={false} href="/#services" className="transition-colors hover:text-mustard">
                   {s.shortName}
                 </Link>
               </li>

@@ -43,7 +43,7 @@ export function Header() {
             {NAV_LINKS.map((link) => (
               <Link
                 key={link.href}
-                href={link.href}
+                prefetch={false} href={link.href}
                 className="relative rounded-full px-4 py-2 text-[0.92rem] font-medium text-ink-soft transition-colors hover:bg-ink/5 hover:text-ink"
               >
                 {link.label}
@@ -92,7 +92,7 @@ export function Header() {
               {NAV_LINKS.map((link, i) => (
                 <motion.div key={link.href} initial={{ opacity: 0, x: -10 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.04 * i + 0.05 }}>
                   <Link
-                    href={link.href}
+                    prefetch={false} href={link.href}
                     onClick={() => setOpen(false)}
                     className="flex items-center justify-between border-b border-line py-4 font-display text-2xl text-ink"
                   >

@@ -1,4 +1,4 @@
-import Image from "next/image";
+import { Photo } from "@/components/ui/photo";
 import { CalendarClock, HeartHandshake, ReceiptText, ShieldCheck, Leaf } from "lucide-react";
 import { SectionHeading } from "@/components/ui/section-heading";
 import { Reveal } from "@/components/ui/reveal";
@@ -47,7 +47,7 @@ export function WhyChoose() {
 
         <div className="mt-14 grid gap-5 md:grid-cols-2 lg:grid-cols-4 lg:grid-rows-[auto_auto]">
           <Reveal className="relative min-h-[22rem] overflow-hidden rounded-[2rem] md:col-span-2 lg:row-span-2">
-            <Image
+            <Photo
               src="/images/eco-products.jpg"
               alt="Amber glass refill bottles and a wooden brush — Morrow's eco-friendly cleaning kit"
               fill

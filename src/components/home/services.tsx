@@ -1,6 +1,6 @@
 "use client";
 
-import Image from "next/image";
+import { Photo } from "@/components/ui/photo";
 import { motion } from "motion/react";
 import { ArrowUpRight, Check } from "lucide-react";
 import { SectionHeading } from "@/components/ui/section-heading";
@@ -57,7 +57,7 @@ export function Services() {
                   aria-label={`${service.name} — from ${formatMoney(service.basePrice * 100)}. Get a quote`}
                 >
                   <div className={`relative w-full overflow-hidden ${wide ? "aspect-[16/9]" : "aspect-[4/3]"}`}>
-                    <Image
+                    <Photo
                       src={service.image}
                       alt=""
                       fill

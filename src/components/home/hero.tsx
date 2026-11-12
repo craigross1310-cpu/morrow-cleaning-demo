@@ -1,9 +1,10 @@
 "use client";
 
-import Image from "next/image";
+import { Photo } from "@/components/ui/photo";
 import { AnimatePresence, motion, useScroll, useTransform } from "motion/react";
 import { ArrowRight, BadgeCheck, CalendarCheck, Check, ShieldCheck, Star } from "lucide-react";
 import { useEffect, useMemo, useRef, useState } from "react";
+import type { CSSProperties } from "react";
 import { ButtonLink } from "@/components/ui/button";
 import { AnimatedPrice } from "@/components/ui/animated-price";
 import { SITE } from "@/config/site";
@@ -32,6 +33,9 @@ const PREVIEWS: { selections: QuoteSelections; summary: string; tags: string[] }
 
 const ease = [0.22, 1, 0.36, 1] as const;
 
+/** Stagger offset for the CSS entrance animations (see .anim-* in globals.css). */
+const delay = (ms: number) => ({ "--d": `${ms}ms` }) as CSSProperties;
+
 export function Hero() {
   const ref = useRef<HTMLElement>(null);
   const { scrollYProgress } = useScroll({ target: ref, offset: ["start start", "end start"] });
@@ -46,61 +50,52 @@ export function Hero() {
       <div className="container-page relative grid items-center gap-14 lg:grid-cols-[1.05fr_1fr] lg:gap-10">
         {/* Copy */}
         <div>
-          <motion.div
-            initial={{ opacity: 0, y: 12 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, ease }}
-            className="inline-flex items-center gap-2 rounded-full border border-ink/10 bg-white/70 py-1.5 pl-1.5 pr-4 text-sm font-medium text-ink-soft shadow-soft backdrop-blur"
+          <div
+            className="anim-rise inline-flex items-center gap-2 rounded-full border border-ink/10 bg-white/70 py-1.5 pl-1.5 pr-4 text-sm font-medium text-ink-soft shadow-soft backdrop-blur"
           >
             <span className="inline-flex items-center gap-1 rounded-full bg-ink px-2.5 py-1 text-xs font-semibold text-cream">
               <Star className="h-3 w-3 fill-mustard text-mustard" aria-hidden /> {SITE.stats.rating}
             </span>
             Rated excellent by {SITE.stats.reviews.toLocaleString("en-GB")}+ households
-          </motion.div>
+          </div>
 
           <h1 className="heading-xl mt-7 text-[2.75rem] text-ink sm:text-6xl lg:text-[4.35rem]">
-            <motion.span className="block" initial={{ opacity: 0, y: 28 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, delay: 0.05, ease }}>
+            <span className="anim-rise block" style={delay(60)}>
               Your home, beautifully clean.
-            </motion.span>
-            <motion.span className="mt-1 block text-ink-soft" initial={{ opacity: 0, y: 28 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, delay: 0.15, ease }}>
+            </span>
+            <span className="anim-rise mt-1 block text-ink-soft" style={delay(140)}>
               Your price,{" "}
               <span className="relative inline-block whitespace-nowrap italic text-ink">
                 in seconds.
-                <motion.svg
+                <svg
                   viewBox="0 0 300 20"
                   className="absolute -bottom-2 left-0 h-3.5 w-full text-mustard"
                   preserveAspectRatio="none"
                   aria-hidden
                 >
-                  <motion.path
+                  <path
                     d="M4 14 C 70 4, 160 4, 296 10"
                     fill="none"
                     stroke="currentColor"
                     strokeWidth="6"
                     strokeLinecap="round"
-                    initial={{ pathLength: 0 }}
-                    animate={{ pathLength: 1 }}
-                    transition={{ duration: 1, delay: 0.7, ease }}
+                    pathLength={1}
+                    className="anim-draw"
+                    style={delay(550)}
                   />
-                </motion.svg>
+                </svg>
               </span>
-            </motion.span>
+            </span>
           </h1>
 
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.25, ease }}
-            className="mt-7 max-w-xl text-lg leading-relaxed text-ink-soft sm:text-xl"
+          <p
+            style={delay(220)}
+            className="anim-rise mt-7 max-w-xl text-lg leading-relaxed text-ink-soft sm:text-xl"
           >
             Professional home cleaning, tailored to your space and your schedule. Get your personalised quote and book online in minutes.
-          </motion.p>
+          </p>
 
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.35, ease }}
-            className="mt-9 flex flex-col gap-3 sm:flex-row"
+          <div style={delay(300)} className="anim-rise mt-9 flex flex-col gap-3 sm:flex-row"
           >
             <ButtonLink href="/#quote" variant="primary" size="lg">
               Get my instant quote
@@ -109,13 +104,9 @@ export function Hero() {
             <ButtonLink href="/#services" variant="outline" size="lg">
               Explore our services
             </ButtonLink>
-          </motion.div>
+          </div>
 
-          <motion.ul
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.8, delay: 0.55 }}
-            className="mt-10 grid max-w-xl grid-cols-1 gap-x-6 gap-y-3 text-sm font-medium text-ink-soft sm:grid-cols-3"
+          <ul style={delay(400)} className="anim-rise mt-10 grid max-w-xl grid-cols-1 gap-x-6 gap-y-3 text-sm font-medium text-ink-soft sm:grid-cols-3"
           >
             <li className="flex items-center gap-2">
               <ShieldCheck className="h-[18px] w-[18px] text-sage" aria-hidden /> Vetted &amp; fully insured
@@ -126,19 +117,16 @@ export function Hero() {
             <li className="flex items-center gap-2">
               <CalendarCheck className="h-[18px] w-[18px] text-sage" aria-hidden /> Free rescheduling
             </li>
-          </motion.ul>
+          </ul>
         </div>
 
         {/* Visual */}
         <div className="relative mx-auto w-full max-w-[34rem] lg:max-w-none">
-          <motion.div
-            initial={{ opacity: 0, scale: 0.96 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 1.1, ease }}
-            className="relative aspect-[4/5] overflow-hidden rounded-[2.5rem] bg-stone shadow-lift sm:aspect-[5/5.4]"
+          <div
+            className="anim-pop relative aspect-[4/5] overflow-hidden rounded-[2.5rem] bg-stone shadow-lift sm:aspect-[5/5.4]"
           >
             <motion.div style={{ y: imageY }} className="absolute inset-[-6%_0_-6%_0]">
-              <Image
+              <Photo
                 src="/images/hero-home.jpg"
                 alt="A bright, freshly cleaned living room with sage walls, plants and a woven rug"
                 fill
@@ -148,27 +136,23 @@ export function Hero() {
               />
             </motion.div>
             <div className="absolute inset-0 bg-gradient-to-t from-ink/30 via-transparent to-transparent" aria-hidden />
-          </motion.div>
+          </div>
 
           {/* Cleaner detail */}
-          <motion.figure
-            initial={{ opacity: 0, y: 24, rotate: -4 }}
-            animate={{ opacity: 1, y: 0, rotate: -3 }}
-            transition={{ duration: 0.9, delay: 0.85, ease }}
-            className="absolute -left-6 bottom-16 hidden w-40 overflow-hidden rounded-[1.5rem] border-4 border-white bg-white shadow-lift sm:block xl:-left-12 xl:w-44"
+          <figure
+            style={delay(650)}
+            className="anim-tilt absolute -left-6 bottom-16 hidden w-40 overflow-hidden rounded-[1.5rem] border-4 border-white bg-white shadow-lift sm:block xl:-left-12 xl:w-44"
           >
             <div className="relative aspect-square">
-              <Image src="/images/cleaner-detail.jpg" alt="A Morrow cleaner in yellow gloves polishing a window" fill sizes="176px" className="object-cover" />
+              <Photo src="/images/cleaner-detail.jpg" alt="A Morrow cleaner in yellow gloves polishing a window" fill sizes="176px" className="object-cover" />
             </div>
             <figcaption className="px-3 py-2 text-xs font-semibold text-ink">Trained in-house</figcaption>
-          </motion.figure>
+          </figure>
 
           {/* Satisfaction badge */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.7, ease }}
-            className="absolute -left-2 top-6 rounded-3xl bg-white/90 p-3 shadow-lift backdrop-blur sm:-left-8 sm:top-8 sm:p-4"
+          <div
+            style={delay(500)}
+            className="anim-rise absolute -left-2 top-6 rounded-3xl bg-white/90 p-3 shadow-lift backdrop-blur sm:-left-8 sm:top-8 sm:p-4"
           >
             <div className="flex items-center gap-3">
               <SatisfactionRing value={SITE.stats.satisfaction} />
@@ -177,17 +161,13 @@ export function Hero() {
                 <p className="text-sm font-semibold text-ink">{SITE.stats.homes} homes cleaned</p>
               </div>
             </div>
-          </motion.div>
+          </div>
 
           {/* Live quote preview */}
           <motion.div style={{ y: cardY }} className="relative z-10 mx-auto -mt-20 w-[88%] max-w-[20rem] sm:absolute sm:-bottom-8 sm:-right-6 sm:mx-0 sm:mt-0 sm:w-[19rem]">
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.9, delay: 0.5, ease }}
-            >
+            <div className="anim-rise" style={delay(380)}>
               <QuotePreview />
-            </motion.div>
+            </div>
           </motion.div>
         </div>
       </div>
@@ -202,7 +182,7 @@ function SatisfactionRing({ value }: { value: number }) {
     <div className="relative h-14 w-14">
       <svg viewBox="0 0 48 48" className="h-14 w-14 -rotate-90" aria-hidden>
         <circle cx="24" cy="24" r={r} fill="none" stroke="#efece8" strokeWidth="5" />
-        <motion.circle
+        <circle
           cx="24"
           cy="24"
           r={r}
@@ -211,9 +191,8 @@ function SatisfactionRing({ value }: { value: number }) {
           strokeWidth="5"
           strokeLinecap="round"
           strokeDasharray={c}
-          initial={{ strokeDashoffset: c }}
-          animate={{ strokeDashoffset: c * (1 - value / 100) }}
-          transition={{ duration: 1.6, delay: 0.9, ease }}
+          className="anim-ring"
+          style={{ "--ring-from": `${c}`, "--ring-to": `${c * (1 - value / 100)}`, "--d": "700ms" } as CSSProperties}
         />
       </svg>
       <span className="absolute inset-0 flex items-center justify-center text-sm font-bold text-ink">{value}%</span>
@@ -225,8 +204,14 @@ function QuotePreview() {
   const [index, setIndex] = useState(0);
   const { today } = useBooking();
 
+  // The first preview renders fully visible in the server HTML; only later ones animate in.
+  const [cycled, setCycled] = useState(false);
+
   useEffect(() => {
-    const id = window.setInterval(() => setIndex((i) => (i + 1) % PREVIEWS.length), 3200);
+    const id = window.setInterval(() => {
+      setCycled(true);
+      setIndex((i) => (i + 1) % PREVIEWS.length);
+    }, 3200);
     return () => window.clearInterval(id);
   }, []);
 
@@ -268,7 +253,7 @@ function QuotePreview() {
         {preview.tags.map((t) => (
           <motion.span
             key={`${index}-${t}`}
-            initial={{ opacity: 0, scale: 0.85 }}
+            initial={cycled ? { opacity: 0, scale: 0.85 } : false}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.3, delay: 0.15 }}
             className={`rounded-full px-2.5 py-1 text-xs font-semibold ${t.startsWith("−") ? "bg-sage-soft text-sage" : "bg-stone text-ink-soft"}`}

@@ -22,6 +22,9 @@ _Website concept by Saltra Solutions._
   - Draggable before/after comparison (also works with the keyboard).
   - Reviews and an FAQ accordion.
   - Final call to action and a footer.
+- **Fast first impression:**
+  - The hero's entrance animation is pure CSS, so it plays as soon as the page paints instead of waiting for JavaScript.
+  - Photos load behind blurred placeholders, and only the font styles the site uses are downloaded.
 - **Mobile-first details:**
   - Sticky quote bar with a swipe-to-close summary drawer.
   - Large tap targets and a mobile-friendly calendar.
@@ -107,7 +110,7 @@ Replace the files in `public/images/`, keeping the same file names, or update th
 - Before/after: `kitchen-before.jpg` and `kitchen-after.jpg`. Use a matched pair of real photos for a live site.
 - Why-choose and final CTA: `eco-products.jpg` and `bedroom.jpg`.
 
-Images are optimised automatically (AVIF/WebP, responsive sizes) by `next/image`. The demo photography comes from Unsplash (Unsplash Licence). The "before" kitchen is a digitally aged version of the "after" photo and is labelled as illustrative on the page.
+Images are optimised automatically (AVIF/WebP, responsive sizes) by `next/image`. Every photo listed in `src/config/images.ts` also gets a blurred placeholder, generated at build time, so it fades in smoothly. If you add a new photo, add an import line there too. The demo photography comes from Unsplash (Unsplash Licence). The "before" kitchen is a digitally aged version of the "after" photo and is labelled as illustrative on the page.
 
 ## Deploying to Vercel
 
