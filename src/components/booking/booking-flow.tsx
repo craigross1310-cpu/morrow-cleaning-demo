@@ -79,7 +79,7 @@ export function BookingFlow() {
             className="mt-8"
             onClick={() => {
               goTo(target);
-              router.push("/#quote");
+              router.push("/quote");
             }}
           >
             {selections.service ? "Finish my quote" : "Get my instant quote"}
@@ -203,7 +203,7 @@ export function BookingFlow() {
                 </p>
 
                 <div className="mt-8 flex flex-col-reverse gap-3 border-t border-line pt-6 sm:flex-row sm:items-center sm:justify-between">
-                  <ButtonLink href="/#quote" variant="ghost" className="!px-4">
+                  <ButtonLink href="/quote" variant="ghost" className="!px-4">
                     <ArrowLeft className="h-4 w-4" aria-hidden /> Edit quote
                   </ButtonLink>
                   <Button type="submit" size="lg">
@@ -223,7 +223,7 @@ export function BookingFlow() {
                 <p className="mt-2 text-ink-soft">Please check everything looks right before confirming your demo booking.</p>
 
                 <div className="mt-8 grid gap-4 sm:grid-cols-2">
-                  <ReviewCard title="Your clean" onEdit={() => router.push("/#quote")} editLabel="Edit quote">
+                  <ReviewCard title="Your clean" onEdit={() => router.push("/quote")} editLabel="Edit quote">
                     <p className="font-semibold text-ink">{service.name}</p>
                     <p className="mt-1 text-sm text-ink-soft">{formatLongDate(selections.date!)}</p>
                     <p className="text-sm text-ink-soft">
@@ -312,7 +312,7 @@ export function BookingFlow() {
         <aside aria-label="Booking summary" className="lg:sticky lg:top-24">
           <div className="rounded-[2rem] border border-line bg-white p-6 shadow-lift sm:p-7">
             <QuoteSummary selections={selections} quote={quote} title="Booking summary" />
-            <Link href="/#quote" className="mt-5 inline-flex items-center gap-1.5 text-sm font-semibold text-ink underline decoration-ink/20 underline-offset-4 hover:decoration-ink">
+            <Link href="/quote" className="mt-5 inline-flex items-center gap-1.5 text-sm font-semibold text-ink underline decoration-ink/20 underline-offset-4 hover:decoration-ink">
               <Pencil className="h-3.5 w-3.5" aria-hidden /> Change your selections
             </Link>
           </div>

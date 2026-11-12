@@ -14,7 +14,7 @@ export function LogoMark({ className = "h-9 w-9" }: { className?: string }) {
 
 export function Logo({ tone = "dark" }: { tone?: "dark" | "light" }) {
   return (
-    <Link href="/" prefetch={false} className="group inline-flex items-center gap-2.5" aria-label={`${SITE.name} — home`}>
+    <Link href="/" className="group inline-flex items-center gap-2.5" aria-label={`${SITE.name} — home`}>
       <LogoMark className="h-9 w-9 transition-transform duration-500 group-hover:rotate-[-8deg]" />
       <span className={`font-display text-[1.35rem] font-medium leading-none tracking-tight ${tone === "light" ? "text-cream" : "text-ink"}`}>
         Morrow<span className="text-mustard">.</span>

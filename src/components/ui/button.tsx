@@ -33,8 +33,6 @@ export function Button({ variant = "primary", size = "md", className = "", type 
 
 type ButtonLinkProps = ComponentProps<typeof Link> & { variant?: Variant; size?: Size; children: ReactNode };
 
-export function ButtonLink({ variant = "primary", size = "md", className = "", prefetch, ...props }: ButtonLinkProps) {
-  // In-page anchors (/#quote) don't need the page prefetched again.
-  const isAnchor = typeof props.href === "string" && props.href.startsWith("/#");
-  return <Link className={buttonClasses(variant, size, className)} prefetch={isAnchor ? false : prefetch} {...props} />;
+export function ButtonLink({ variant = "primary", size = "md", className = "", ...props }: ButtonLinkProps) {
+  return <Link className={buttonClasses(variant, size, className)} {...props} />;
 }

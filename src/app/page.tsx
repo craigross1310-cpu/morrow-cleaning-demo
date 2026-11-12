@@ -1,27 +1,21 @@
 import { Hero } from "@/components/home/hero";
-import { TrustMarquee } from "@/components/home/trust-marquee";
-import { Services } from "@/components/home/services";
-import { HowItWorks } from "@/components/home/how-it-works";
-import { QuoteCalculator } from "@/components/calculator/quote-calculator";
-import { WhyChoose } from "@/components/home/why-choose";
-import { BeforeAfter } from "@/components/home/before-after";
-import { Reviews } from "@/components/home/reviews";
-import { FAQ } from "@/components/home/faq";
-import { FinalCTA } from "@/components/home/final-cta";
+import { TrustStrip } from "@/components/home/trust-strip";
+import { ServicesPreview } from "@/components/home/services-preview";
+import { WhyPreview } from "@/components/home/why-preview";
+import { ResultsPreview } from "@/components/home/results-preview";
+import { ReviewsPreview } from "@/components/home/reviews-preview";
+import { CtaBand } from "@/components/shared/cta-band";
 
 export default function HomePage() {
   return (
     <>
       <Hero />
-      <TrustMarquee />
-      <Services />
-      <HowItWorks />
-      <QuoteCalculator />
-      <WhyChoose />
-      <BeforeAfter />
-      <Reviews />
-      <FAQ />
-      <FinalCTA />
+      <TrustStrip />
+      <ServicesPreview />
+      <WhyPreview />
+      <ResultsPreview />
+      <ReviewsPreview />
+      <CtaBand />
     </>
   );
 }

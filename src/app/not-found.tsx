@@ -9,7 +9,7 @@ export default function NotFound() {
         <p className="mt-4 text-ink-soft">The page you&apos;re looking for doesn&apos;t exist.</p>
         <div className="mt-8 flex justify-center gap-3">
           <ButtonLink href="/">Back to home</ButtonLink>
-          <ButtonLink href="/#quote" variant="outline">Get a quote</ButtonLink>
+          <ButtonLink href="/quote" variant="outline">Get a quote</ButtonLink>
         </div>
       </div>
     </div>

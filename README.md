@@ -6,33 +6,31 @@ _Website concept by Saltra Solutions._
 
 ---
 
+## Site structure
+
+| Page | Route | What it contains |
+| --- | --- | --- |
+| Home | `/` | Short introduction: hero, trust strip, 3 featured services, 3 benefits, a before/after preview, 3 reviews and a final call to action |
+| Services | `/services` | All five services with images, what's included and starting prices, plus optional extras and recurring savings |
+| How it works | `/how-it-works` | The three booking stages, what happens after booking and "Our standards" (`#standards`) |
+| Results | `/results` | Three interactive before/after sliders, a room-by-room deep-clean checklist and quality standards |
+| Reviews | `/reviews` | Overall rating, rating breakdown and a review grid you can filter by service |
+| FAQs & contact | `/faq` | FAQ accordion, contact details and an enquiry form (`#contact`) |
+| Get a quote | `/quote` | The five-step instant quote calculator |
+| Booking | `/book`, `/book/confirmed` | Details form, final review and demo confirmation |
+
+Every service's "Get a quote" button links to `/quote?service=<id>`. That opens the calculator with the service pre-selected, at the property step. Quote progress is kept while visitors move between pages, and survives a page reload.
+
 ## Highlights
 
 - **Five-step quote calculator:** service → property → frequency → extras → date & time.
   - The price updates live and animates, with an itemised breakdown.
   - Recurring discounts, minimum-visit logic and estimated duration and team size are all calculated.
-  - The customer can jump back to any step, and selections persist across reloads (`sessionStorage`).
-  - Invalid combinations are corrected automatically, and the customer is told why. Examples: a bungalow can't have 2 floors, and end-of-tenancy cleans can't be weekly.
-- **Booking flow:** details form with validation (UK phone and postcode) → final review → demo confirmation.
-  - The confirmation shows a reference number and can be copied, added to a calendar (`.ics`) or printed.
-- **Homepage:**
-  - Animated hero with a live-quote preview that uses the real pricing engine.
-  - Services that deep-link into the calculator.
-  - Animated "How it works" section.
-  - Draggable before/after comparison (also works with the keyboard).
-  - Reviews and an FAQ accordion.
-  - Final call to action and a footer.
-- **Fast first impression:**
-  - The hero's entrance animation is pure CSS, so it plays as soon as the page paints instead of waiting for JavaScript.
-  - Photos load behind blurred placeholders, and only the font styles the site uses are downloaded.
-- **Mobile-first details:**
-  - Sticky quote bar with a swipe-to-close summary drawer.
-  - Large tap targets and a mobile-friendly calendar.
-  - Safe-area padding for iPhone.
-- **Accessibility:**
-  - Semantic radio and checkbox roles and labelled controls.
-  - Focus moves to each new step's heading.
-  - Respects `prefers-reduced-motion`, and includes a skip link.
+  - Invalid combinations are corrected automatically, and the customer is told why.
+- **Booking flow:** details form with validation (UK phone and postcode) → final review → demo confirmation with a reference, `.ics` calendar export and print.
+- **Fast first impression:** the hero's entrance animation is pure CSS, photos load behind blurred placeholders, and only the font styles in use are downloaded.
+- **Mobile-first details:** a sticky quote bar with a swipe-to-close summary drawer, swipeable card rows, large tap targets and safe-area padding for iPhone.
+- **Accessibility:** semantic roles and labelled controls, breadcrumbs, `aria-current` on navigation, a skip link, and respect for `prefers-reduced-motion`.
 
 ## Tech stack
 
@@ -54,21 +52,25 @@ Requires Node.js 20.9 or newer.
 
 ```
 src/
+  app/              ← one folder per page (services, how-it-works, results, reviews, faq, quote, book…)
   config/
     pricing.ts      ← ALL prices, discounts, durations, extras, time slots, booking rules
-    site.ts         ← brand name, contact details, social links, headline stats, nav
+    site.ts         ← brand name, contact details, social links, stats, navigation
+    images.ts       ← photo registry (adds blurred placeholders)
+  content/          ← reviews, FAQs, benefits and before/after content, shared by the home previews and full pages
   lib/
     pricing.ts      ← pure pricing engine (integer pence, total = sum of line items)
     availability.ts ← demo calendar availability (swap for a real scheduling API)
     booking-store.tsx ← React context + sessionStorage persistence
     validation.ts   ← form validation & reference generation
   components/
-    calculator/     ← steps, summary panel, mobile drawer
+    home/           ← homepage preview sections
+    shared/         ← page header + breadcrumbs, CTA band, before/after slider, review card, FAQ accordion, standards
+    calculator/     ← quote steps, summary panel, mobile drawer, ?service= pre-fill
     booking/        ← details form, review, confirmation
-    home/           ← homepage sections
+    contact/ reviews/ ← enquiry form, filterable review grid
     layout/         ← header, footer, legal page shell
-    ui/             ← buttons, reveal animation, animated price, icons, logo
-  app/              ← routes: /, /book, /book/confirmed, /privacy, /terms
+    ui/             ← buttons, reveal animation, animated price, icons, logo, photo
 public/images/      ← all photography
 scripts/test-pricing.ts
 ```
@@ -98,7 +100,7 @@ After editing, run `npm run test:pricing`. A few tests assert the demo values fr
 - **Colours:** the `@theme` block in `src/app/globals.css`. For example, `--color-mustard` is the accent and `--color-ink` is the text colour.
 - **Fonts:** `src/app/layout.tsx` (Fraunces for display text, Manrope for body text, both via `next/font`).
 - **Logo:** `src/components/ui/logo.tsx` and `src/app/icon.svg` (the favicon).
-- **Copy:** each homepage section lives in its own file under `src/components/home/`.
+- **Copy:** homepage sections live in `src/components/home/`, and each page's copy is in `src/app/<page>/page.tsx`. Reviews, FAQs, benefits and before/after captions live in `src/content/`, so editing them updates both the homepage previews and the full pages.
 - **Social sharing image:** `src/app/opengraph-image.tsx`.
 
 ## Editing imagery
@@ -107,10 +109,10 @@ Replace the files in `public/images/`, keeping the same file names, or update th
 
 - Service cards: `SERVICES[].image` in `src/config/pricing.ts`.
 - Hero: `hero-home.jpg` and `cleaner-detail.jpg`.
-- Before/after: `kitchen-before.jpg` and `kitchen-after.jpg`. Use a matched pair of real photos for a live site.
+- Before/after: the pairs listed in `src/content/results.ts`. Use matched pairs of real photos for a live site.
 - Why-choose and final CTA: `eco-products.jpg` and `bedroom.jpg`.
 
-Images are optimised automatically (AVIF/WebP, responsive sizes) by `next/image`. Every photo listed in `src/config/images.ts` also gets a blurred placeholder, generated at build time, so it fades in smoothly. If you add a new photo, add an import line there too. The demo photography comes from Unsplash (Unsplash Licence). The "before" kitchen is a digitally aged version of the "after" photo and is labelled as illustrative on the page.
+Images are optimised automatically (AVIF/WebP, responsive sizes) by `next/image`. Every photo listed in `src/config/images.ts` also gets a blurred placeholder, generated at build time, so it fades in smoothly. If you add a new photo, add an import line there too. The demo photography comes from Unsplash (Unsplash Licence). The "before" images are digitally aged versions of the "after" photos, and are labelled as illustrative on the site.
 
 ## Deploying to Vercel
 

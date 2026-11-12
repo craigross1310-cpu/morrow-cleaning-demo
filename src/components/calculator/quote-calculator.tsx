@@ -132,25 +132,19 @@ export function QuoteCalculator() {
   );
 
   return (
-    <section id="quote" ref={sectionRef} aria-labelledby="quote-title" className="relative bg-gradient-to-b from-cream via-blush/60 to-cream pt-24 pb-36 sm:pt-28 lg:pb-28">
+    <section id="quote" ref={sectionRef} aria-label="Instant quote calculator" className="relative pb-36 pt-2 lg:pb-28">
       <div className="container-page">
-        <div className="flex flex-col justify-between gap-6 md:flex-row md:items-end">
-          <div className="max-w-2xl">
-            <p className="eyebrow">Instant quote</p>
-            <h2 id="quote-title" className="heading-lg mt-4 text-[2.25rem] text-ink sm:text-5xl">
-              Build your clean, <em className="text-ink-soft">see your price</em>
-            </h2>
-            <p className="mt-4 text-lg text-ink-soft">Five quick steps. Your price updates live with every choice — no email required.</p>
-          </div>
+        <div className="flex min-h-6 items-center justify-between gap-4">
+          <p className="text-sm text-ink-soft">Five quick steps · no email required</p>
           {ready && (selections.service || maxStepIndex > 0) ? (
-            <button type="button" onClick={() => { setDirection(-1); reset(); }} className="self-start text-sm font-semibold text-ink-soft underline decoration-ink/20 underline-offset-4 hover:text-ink md:self-auto">
+            <button type="button" onClick={() => { setDirection(-1); reset(); }} className="text-sm font-semibold text-ink-soft underline decoration-ink/20 underline-offset-4 hover:text-ink">
               Start over
             </button>
           ) : null}
         </div>
 
         {/* Progress */}
-        <nav aria-label="Quote progress" className="mt-10">
+        <nav aria-label="Quote progress" className="mt-6">
           <ol className="flex items-center gap-1.5 sm:gap-2">
             {STEPS.map((s, i) => {
               const done = i < index && stepIssues(s.id, selections).length === 0;

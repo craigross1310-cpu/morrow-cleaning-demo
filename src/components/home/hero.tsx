@@ -2,12 +2,11 @@
 
 import { Photo } from "@/components/ui/photo";
 import { AnimatePresence, motion, useScroll, useTransform } from "motion/react";
-import { ArrowRight, BadgeCheck, CalendarCheck, Check, ShieldCheck, Star } from "lucide-react";
+import { ArrowRight, Check } from "lucide-react";
 import { useEffect, useMemo, useRef, useState } from "react";
 import type { CSSProperties } from "react";
 import { ButtonLink } from "@/components/ui/button";
 import { AnimatedPrice } from "@/components/ui/animated-price";
-import { SITE } from "@/config/site";
 import { EMPTY_SELECTIONS, calculateQuote, formatDuration, getService } from "@/lib/pricing";
 import type { QuoteSelections } from "@/lib/pricing";
 import { formatShortDate, nextAvailableSlot } from "@/lib/availability";
@@ -39,132 +38,65 @@ const delay = (ms: number) => ({ "--d": `${ms}ms` }) as CSSProperties;
 export function Hero() {
   const ref = useRef<HTMLElement>(null);
   const { scrollYProgress } = useScroll({ target: ref, offset: ["start start", "end start"] });
-  const imageY = useTransform(scrollYProgress, [0, 1], ["0%", "12%"]);
-  const cardY = useTransform(scrollYProgress, [0, 1], [0, -60]);
+  const imageY = useTransform(scrollYProgress, [0, 1], ["0%", "10%"]);
+  const cardY = useTransform(scrollYProgress, [0, 1], [0, -50]);
 
   return (
-    <section ref={ref} className="grain relative overflow-hidden bg-gradient-to-b from-blush via-cream to-cream pt-28 pb-16 sm:pt-32 lg:pt-36 lg:pb-24">
+    <section ref={ref} className="grain relative overflow-hidden bg-gradient-to-b from-blush via-cream to-cream pb-20 pt-28 sm:pt-32 lg:pb-28 lg:pt-36">
       <div className="pointer-events-none absolute -left-32 top-10 h-[30rem] w-[30rem] rounded-full bg-mustard/15 blur-[110px]" aria-hidden />
       <div className="pointer-events-none absolute right-0 top-1/3 h-[26rem] w-[26rem] rounded-full bg-blush-deep blur-[100px]" aria-hidden />
 
-      <div className="container-page relative grid items-center gap-14 lg:grid-cols-[1.05fr_1fr] lg:gap-10">
+      <div className="container-page relative grid items-center gap-12 lg:grid-cols-[1fr_1.05fr] lg:gap-14">
         {/* Copy */}
-        <div>
-          <div
-            className="anim-rise inline-flex items-center gap-2 rounded-full border border-ink/10 bg-white/70 py-1.5 pl-1.5 pr-4 text-sm font-medium text-ink-soft shadow-soft backdrop-blur"
-          >
-            <span className="inline-flex items-center gap-1 rounded-full bg-ink px-2.5 py-1 text-xs font-semibold text-cream">
-              <Star className="h-3 w-3 fill-mustard text-mustard" aria-hidden /> {SITE.stats.rating}
-            </span>
-            Rated excellent by {SITE.stats.reviews.toLocaleString("en-GB")}+ households
-          </div>
-
-          <h1 className="heading-xl mt-7 text-[2.75rem] text-ink sm:text-6xl lg:text-[4.35rem]">
+        <div className="max-w-xl">
+          <p className="eyebrow anim-rise">Premium home cleaning · London</p>
+          <h1 className="heading-xl mt-6 text-[2.75rem] text-ink min-[400px]:text-[3rem] sm:text-7xl lg:text-[3.6rem] xl:text-[4.6rem]">
             <span className="anim-rise block" style={delay(60)}>
-              Your home, beautifully clean.
+              Your home,
             </span>
-            <span className="anim-rise mt-1 block text-ink-soft" style={delay(140)}>
-              Your price,{" "}
-              <span className="relative inline-block whitespace-nowrap italic text-ink">
-                in seconds.
-                <svg
-                  viewBox="0 0 300 20"
-                  className="absolute -bottom-2 left-0 h-3.5 w-full text-mustard"
-                  preserveAspectRatio="none"
-                  aria-hidden
-                >
-                  <path
-                    d="M4 14 C 70 4, 160 4, 296 10"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="6"
-                    strokeLinecap="round"
-                    pathLength={1}
-                    className="anim-draw"
-                    style={delay(550)}
-                  />
+            <span className="anim-rise block" style={delay(140)}>
+              <span className="relative inline-block whitespace-nowrap italic">
+                beautifully clean.
+                <svg viewBox="0 0 300 20" className="absolute -bottom-2 left-0 h-3.5 w-full text-mustard" preserveAspectRatio="none" aria-hidden>
+                  <path d="M4 14 C 70 4, 160 4, 296 10" fill="none" stroke="currentColor" strokeWidth="6" strokeLinecap="round" pathLength={1} className="anim-draw" style={delay(550)} />
                 </svg>
               </span>
             </span>
           </h1>
 
-          <p
-            style={delay(220)}
-            className="anim-rise mt-7 max-w-xl text-lg leading-relaxed text-ink-soft sm:text-xl"
-          >
-            Professional home cleaning, tailored to your space and your schedule. Get your personalised quote and book online in minutes.
+          <p style={delay(220)} className="anim-rise mt-8 text-lg leading-relaxed text-ink-soft sm:text-xl">
+            Professional home cleaning, tailored to your space and your schedule.
           </p>
 
-          <div style={delay(300)} className="anim-rise mt-9 flex flex-col gap-3 sm:flex-row"
-          >
-            <ButtonLink href="/#quote" variant="primary" size="lg">
-              Get my instant quote
+          <div style={delay(300)} className="anim-rise mt-10 flex flex-col gap-3 sm:flex-row">
+            <ButtonLink href="/quote" variant="primary" size="lg">
+              Get an instant quote
               <ArrowRight className="h-5 w-5 transition-transform duration-300 group-hover/btn:translate-x-1" aria-hidden />
             </ButtonLink>
-            <ButtonLink href="/#services" variant="outline" size="lg">
+            <ButtonLink href="/services" variant="outline" size="lg">
               Explore our services
             </ButtonLink>
           </div>
-
-          <ul style={delay(400)} className="anim-rise mt-10 grid max-w-xl grid-cols-1 gap-x-6 gap-y-3 text-sm font-medium text-ink-soft sm:grid-cols-3"
-          >
-            <li className="flex items-center gap-2">
-              <ShieldCheck className="h-[18px] w-[18px] text-sage" aria-hidden /> Vetted &amp; fully insured
-            </li>
-            <li className="flex items-center gap-2">
-              <BadgeCheck className="h-[18px] w-[18px] text-sage" aria-hidden /> No hidden fees
-            </li>
-            <li className="flex items-center gap-2">
-              <CalendarCheck className="h-[18px] w-[18px] text-sage" aria-hidden /> Free rescheduling
-            </li>
-          </ul>
         </div>
 
         {/* Visual */}
-        <div className="relative mx-auto w-full max-w-[34rem] lg:max-w-none">
-          <div
-            className="anim-pop relative aspect-[4/5] overflow-hidden rounded-[2.5rem] bg-stone shadow-lift sm:aspect-[5/5.4]"
-          >
+        <div className="relative mx-auto w-full max-w-[36rem] lg:max-w-none">
+          <div className="anim-pop relative aspect-[4/4.6] overflow-hidden rounded-[2.5rem] bg-stone shadow-lift sm:aspect-[5/5.2]">
             <motion.div style={{ y: imageY }} className="absolute inset-[-6%_0_-6%_0]">
               <Photo
                 src="/images/hero-home.jpg"
                 alt="A bright, freshly cleaned living room with sage walls, plants and a woven rug"
                 fill
                 priority
-                sizes="(min-width: 1024px) 46vw, 92vw"
+                sizes="(min-width: 1024px) 50vw, 92vw"
                 className="object-cover object-[35%_center]"
               />
             </motion.div>
-            <div className="absolute inset-0 bg-gradient-to-t from-ink/30 via-transparent to-transparent" aria-hidden />
-          </div>
-
-          {/* Cleaner detail */}
-          <figure
-            style={delay(650)}
-            className="anim-tilt absolute -left-6 bottom-16 hidden w-40 overflow-hidden rounded-[1.5rem] border-4 border-white bg-white shadow-lift sm:block xl:-left-12 xl:w-44"
-          >
-            <div className="relative aspect-square">
-              <Photo src="/images/cleaner-detail.jpg" alt="A Morrow cleaner in yellow gloves polishing a window" fill sizes="176px" className="object-cover" />
-            </div>
-            <figcaption className="px-3 py-2 text-xs font-semibold text-ink">Trained in-house</figcaption>
-          </figure>
-
-          {/* Satisfaction badge */}
-          <div
-            style={delay(500)}
-            className="anim-rise absolute -left-2 top-6 rounded-3xl bg-white/90 p-3 shadow-lift backdrop-blur sm:-left-8 sm:top-8 sm:p-4"
-          >
-            <div className="flex items-center gap-3">
-              <SatisfactionRing value={SITE.stats.satisfaction} />
-              <div>
-                <p className="text-xs font-semibold uppercase tracking-wider text-muted">Satisfaction</p>
-                <p className="text-sm font-semibold text-ink">{SITE.stats.homes} homes cleaned</p>
-              </div>
-            </div>
+            <div className="absolute inset-0 bg-gradient-to-t from-ink/25 via-transparent to-transparent" aria-hidden />
           </div>
 
           {/* Live quote preview */}
-          <motion.div style={{ y: cardY }} className="relative z-10 mx-auto -mt-20 w-[88%] max-w-[20rem] sm:absolute sm:-bottom-8 sm:-right-6 sm:mx-0 sm:mt-0 sm:w-[19rem]">
+          <motion.div style={{ y: cardY }} className="relative z-10 mx-auto -mt-20 w-[88%] max-w-[20rem] sm:absolute sm:-bottom-10 sm:-left-8 sm:mx-0 sm:mt-0 sm:w-[19rem]">
             <div className="anim-rise" style={delay(380)}>
               <QuotePreview />
             </div>
@@ -172,31 +104,6 @@ export function Hero() {
         </div>
       </div>
     </section>
-  );
-}
-
-function SatisfactionRing({ value }: { value: number }) {
-  const r = 20;
-  const c = 2 * Math.PI * r;
-  return (
-    <div className="relative h-14 w-14">
-      <svg viewBox="0 0 48 48" className="h-14 w-14 -rotate-90" aria-hidden>
-        <circle cx="24" cy="24" r={r} fill="none" stroke="#efece8" strokeWidth="5" />
-        <circle
-          cx="24"
-          cy="24"
-          r={r}
-          fill="none"
-          stroke="#e9b52c"
-          strokeWidth="5"
-          strokeLinecap="round"
-          strokeDasharray={c}
-          className="anim-ring"
-          style={{ "--ring-from": `${c}`, "--ring-to": `${c * (1 - value / 100)}`, "--d": "700ms" } as CSSProperties}
-        />
-      </svg>
-      <span className="absolute inset-0 flex items-center justify-center text-sm font-bold text-ink">{value}%</span>
-    </div>
   );
 }
 

@@ -41,7 +41,7 @@ export function ConfirmationView() {
         <div className="mx-auto max-w-xl rounded-[2rem] border border-line bg-white p-10 text-center shadow-soft">
           <h1 className="heading-lg text-3xl text-ink">No booking to show yet</h1>
           <p className="mt-4 text-ink-soft">Build your quote and choose a time — your demo confirmation will appear here.</p>
-          <ButtonLink href="/#quote" size="lg" className="mt-8">
+          <ButtonLink href="/quote" size="lg" className="mt-8">
             Get my instant quote
           </ButtonLink>
         </div>
@@ -108,7 +108,7 @@ function Confirmed({ c }: { c: Confirmation }) {
 
   const startOver = () => {
     reset();
-    router.push("/#quote");
+    router.push("/quote");
   };
 
   return (

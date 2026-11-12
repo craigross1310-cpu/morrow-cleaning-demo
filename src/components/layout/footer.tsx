@@ -2,7 +2,7 @@ import Link from "next/link";
 import { Mail, MapPin, Phone, Clock } from "lucide-react";
 import { Logo } from "@/components/ui/logo";
 import { SocialIcon } from "@/components/ui/icons";
-import { NAV_LINKS, SITE } from "@/config/site";
+import { NAV_LINKS, SITE, serviceAnchor } from "@/config/site";
 import { SERVICES } from "@/config/pricing";
 
 export function Footer() {
@@ -38,14 +38,14 @@ export function Footer() {
           <ul className="mt-5 space-y-3 text-sm">
             {NAV_LINKS.map((l) => (
               <li key={l.href}>
-                <Link prefetch={false} href={l.href} className="transition-colors hover:text-mustard">
+                <Link href={l.href} className="transition-colors hover:text-mustard">
                   {l.label}
                 </Link>
               </li>
             ))}
             <li>
-              <Link prefetch={false} href="/#quote" className="transition-colors hover:text-mustard">
-                Instant quote
+              <Link href="/quote" className="transition-colors hover:text-mustard">
+                Get a quote
               </Link>
             </li>
           </ul>
@@ -56,7 +56,7 @@ export function Footer() {
           <ul className="mt-5 space-y-3 text-sm">
             {SERVICES.map((s) => (
               <li key={s.id}>
-                <Link prefetch={false} href="/#services" className="transition-colors hover:text-mustard">
+                <Link href={serviceAnchor(s.id)} className="transition-colors hover:text-mustard">
                   {s.shortName}
                 </Link>
               </li>

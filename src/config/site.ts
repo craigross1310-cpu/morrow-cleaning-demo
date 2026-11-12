@@ -32,9 +32,16 @@ export const SITE = {
 } as const;
 
 export const NAV_LINKS = [
-  { label: "Services", href: "/#services" },
-  { label: "How it works", href: "/#how-it-works" },
-  { label: "Results", href: "/#results" },
-  { label: "Reviews", href: "/#reviews" },
-  { label: "FAQ", href: "/#faq" },
+  { label: "Home", href: "/" },
+  { label: "Services", href: "/services" },
+  { label: "How it works", href: "/how-it-works" },
+  { label: "Results", href: "/results" },
+  { label: "Reviews", href: "/reviews" },
+  { label: "FAQs", href: "/faq" },
+  { label: "Contact", href: "/faq#contact" },
 ] as const;
+
+/** Anchor id for each service on the Services page, e.g. /services#deep */
+export const serviceAnchor = (id: string) => `/services#${id}`;
+/** Opens the quote calculator with a service pre-selected. */
+export const quoteFor = (id: string) => `/quote?service=${id}`;
