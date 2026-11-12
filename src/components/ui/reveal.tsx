@@ -1,28 +1,26 @@
-"use client";
-
-import { motion } from "motion/react";
-import type { ReactNode } from "react";
+import type { CSSProperties, ReactNode } from "react";
 
 interface RevealProps {
   children: ReactNode;
+  /** Staggers the effect slightly later in the scroll (seconds-ish, kept for API compatibility). */
   delay?: number;
-  y?: number;
   className?: string;
   as?: "div" | "li" | "section" | "article";
 }
 
-/** Fades and lifts content into view the first time it scrolls on-screen. */
-export function Reveal({ children, delay = 0, y = 24, className, as = "div" }: RevealProps) {
-  const Comp = motion[as];
+/**
+ * Fades and lifts content in as it scrolls into view.
+ *
+ * Pure CSS (scroll-driven animations — see `.reveal` in globals.css), so the
+ * content is in the page and visible from the very first paint: nothing waits
+ * for JavaScript to download. Browsers without scroll-driven animation
+ * support simply show the content without the effect.
+ */
+export function Reveal({ children, delay = 0, className = "", as: Tag = "div" }: RevealProps) {
+  const style = delay ? ({ "--reveal-shift": `${Math.min(delay, 0.3) * 60}%` } as CSSProperties) : undefined;
   return (
-    <Comp
-      className={className}
-      initial={{ opacity: 0, y }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "0px 0px -12% 0px" }}
-      transition={{ duration: 0.7, delay, ease: [0.22, 1, 0.36, 1] }}
-    >
+    <Tag className={`reveal ${className}`} style={style}>
       {children}
-    </Comp>
+    </Tag>
   );
 }
