@@ -21,7 +21,7 @@ export function ReviewsPreview() {
           </Reveal>
         </div>
 
-        <ul className="no-scrollbar -mx-5 mt-14 flex snap-x snap-mandatory gap-5 overflow-x-auto px-5 pb-4 md:mx-0 md:grid md:grid-cols-3 md:overflow-visible md:px-0">
+        <ul className="no-scrollbar -mx-5 mt-12 flex snap-x snap-mandatory gap-5 overflow-x-auto overflow-y-hidden overscroll-x-contain px-5 pb-6 pt-2 md:mx-0 md:grid md:grid-cols-3 md:overflow-visible md:px-0">
           {REVIEWS.slice(0, 3).map((r, i) => (
             <Reveal as="li" key={r.name} delay={i * 0.08} className="w-[85%] shrink-0 snap-center md:w-auto">
               <ReviewCard review={r} />

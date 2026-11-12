@@ -14,7 +14,7 @@ export function ReviewGrid() {
 
   return (
     <div>
-      <div role="group" aria-label="Filter reviews by service" className="no-scrollbar -mx-5 flex gap-2 overflow-x-auto px-5 pb-1 sm:mx-0 sm:flex-wrap sm:px-0">
+      <div role="group" aria-label="Filter reviews by service" className="no-scrollbar -mx-5 flex gap-2 overflow-x-auto overflow-y-hidden overscroll-x-contain px-5 pb-1 sm:mx-0 sm:flex-wrap sm:px-0">
         {[{ id: "all" as const, shortName: "All reviews" }, ...options].map((o) => {
           const active = filter === o.id;
           return (

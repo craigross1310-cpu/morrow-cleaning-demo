@@ -25,7 +25,7 @@ export function ServicesPreview() {
           </Reveal>
         </div>
 
-        <ul className="no-scrollbar -mx-5 mt-12 flex snap-x snap-mandatory gap-4 overflow-x-auto px-5 pb-4 md:mx-0 md:mt-14 md:grid md:grid-cols-3 md:gap-6 md:overflow-visible md:px-0">
+        <ul className="no-scrollbar -mx-5 mt-10 flex snap-x snap-mandatory gap-4 overflow-x-auto overflow-y-hidden overscroll-x-contain px-5 pb-6 pt-2 md:mx-0 md:mt-14 md:grid md:grid-cols-3 md:gap-6 md:overflow-visible md:px-0">
           {services.map((service, i) => (
             <Reveal as="li" key={service.id} delay={i * 0.08} className="w-[82%] shrink-0 snap-center md:w-auto">
               <Link

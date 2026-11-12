@@ -342,7 +342,7 @@ function BookingSteps({ phase }: { phase: Phase }) {
     { label: "Confirmed", state: "todo" },
   ] as const;
   return (
-    <ol className="flex items-center gap-2 overflow-x-auto text-sm no-scrollbar" aria-label="Booking progress">
+    <ol className="flex items-center gap-2 overflow-x-auto overflow-y-hidden overscroll-x-contain text-sm no-scrollbar" aria-label="Booking progress">
       {items.map((item, i) => (
         <li key={item.label} className="flex shrink-0 items-center gap-2" aria-current={item.state === "active" ? "step" : undefined}>
           <span
