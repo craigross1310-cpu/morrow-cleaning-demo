@@ -75,8 +75,10 @@ export function QuoteCalculator() {
     if (!userNavigated.current) return;
     userNavigated.current = false;
     const card = cardRef.current;
-    if (card && card.getBoundingClientRect().top < 72) {
-      card.scrollIntoView({ behavior: "smooth", block: "start" });
+    // Scroll up only if the card's top has slipped under the floating header.
+    if (card) {
+      const headerSpace = parseFloat(getComputedStyle(card).scrollMarginTop) || 88;
+      if (card.getBoundingClientRect().top < headerSpace) card.scrollIntoView({ behavior: "smooth", block: "start" });
     }
     headingRef.current?.focus({ preventScroll: true });
   }, [step]);
@@ -190,7 +192,7 @@ export function QuoteCalculator() {
 
         <div className="mt-8 grid items-start gap-8 lg:grid-cols-[minmax(0,1fr)_23rem] xl:grid-cols-[minmax(0,1fr)_25rem]">
           {/* Step card */}
-          <div ref={cardRef} className="scroll-mt-24 rounded-[2rem] border border-line bg-white/80 p-5 shadow-soft backdrop-blur sm:p-8">
+          <div ref={cardRef} className="scroll-mt-header rounded-[2rem] border border-line bg-white/80 p-5 shadow-soft backdrop-blur sm:p-8">
             <AnimatePresence>
               {notice ? (
                 <motion.div

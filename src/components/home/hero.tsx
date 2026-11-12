@@ -42,7 +42,7 @@ export function Hero() {
   const cardY = useTransform(scrollYProgress, [0, 1], [0, -50]);
 
   return (
-    <section ref={ref} className="grain relative overflow-hidden bg-gradient-to-b from-blush via-cream to-cream pb-20 pt-28 sm:pt-32 lg:pb-28 lg:pt-36">
+    <section ref={ref} className="grain relative overflow-hidden bg-gradient-to-b from-blush via-cream to-cream pb-20 pt-[calc(var(--safe-top)+7rem)] sm:pt-[calc(var(--safe-top)+8rem)] lg:pb-28 lg:pt-[calc(var(--safe-top)+9rem)]">
       <div className="pointer-events-none absolute -left-32 top-10 h-[30rem] w-[30rem] rounded-full bg-mustard/15 blur-[110px]" aria-hidden />
       <div className="pointer-events-none absolute right-0 top-1/3 h-[26rem] w-[26rem] rounded-full bg-blush-deep blur-[100px]" aria-hidden />
 

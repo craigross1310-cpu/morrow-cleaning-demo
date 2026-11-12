@@ -39,7 +39,7 @@ export default function FaqPage() {
         </Reveal>
       </section>
 
-      <section id="contact" aria-labelledby="contact-title" className="scroll-mt-20 bg-stone py-24 sm:py-28">
+      <section id="contact" aria-labelledby="contact-title" className="scroll-mt-header bg-stone py-24 sm:py-28">
         <div className="container-page grid gap-12 lg:grid-cols-[0.8fr_1.2fr] lg:gap-16">
           <div>
             <SectionHeading id="contact-title" eyebrow="Contact" title="We'd love to hear from you" intro="Our team is on hand Monday to Saturday." />

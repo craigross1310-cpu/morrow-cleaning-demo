@@ -2,7 +2,7 @@ import type { ReactNode } from "react";
 
 export function LegalPage({ title, updated, children }: { title: string; updated: string; children: ReactNode }) {
   return (
-    <div className="bg-gradient-to-b from-blush via-cream to-cream pb-24 pt-32 sm:pt-40">
+    <div className="bg-gradient-to-b from-blush via-cream to-cream pb-24 pt-[calc(var(--safe-top)+8rem)] sm:pt-[calc(var(--safe-top)+10rem)]">
       <article className="container-page max-w-3xl">
         <p className="eyebrow">Legal</p>
         <h1 className="heading-xl mt-4 text-4xl text-ink sm:text-5xl">{title}</h1>

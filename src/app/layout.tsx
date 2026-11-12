@@ -49,6 +49,9 @@ export const viewport: Viewport = {
   themeColor: "#fbf7f4",
   width: "device-width",
   initialScale: 1,
+  // Let the page draw under the iPhone status bar; the floating header and
+  // page spacing use env(safe-area-inset-top) to stay clear of it.
+  viewportFit: "cover",
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

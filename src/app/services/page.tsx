@@ -48,7 +48,7 @@ export default function ServicesPage() {
           const Icon = SERVICE_ICONS[s.icon];
           const flip = i % 2 === 1;
           return (
-            <section key={s.id} id={s.id} aria-labelledby={`${s.id}-title`} className="grid scroll-mt-28 items-center gap-10 lg:grid-cols-2 lg:gap-16">
+            <section key={s.id} id={s.id} aria-labelledby={`${s.id}-title`} className="grid scroll-mt-header items-center gap-10 lg:grid-cols-2 lg:gap-16">
               <Reveal className={flip ? "lg:order-2" : ""}>
                 <div className="relative aspect-[4/3] overflow-hidden rounded-[2rem] bg-stone shadow-lift">
                   <Photo src={s.image} alt="" fill sizes="(min-width: 1024px) 45vw, 92vw" className="object-cover" />

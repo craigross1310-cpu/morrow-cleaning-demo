@@ -16,7 +16,7 @@ interface PageHeaderProps {
 export function PageHeader({ crumb, eyebrow, title, intro, children, align = "left" }: PageHeaderProps) {
   const centered = align === "center";
   return (
-    <header className="grain relative overflow-hidden bg-gradient-to-b from-blush via-cream to-cream pb-12 pt-28 sm:pb-16 sm:pt-36">
+    <header className="grain relative overflow-hidden bg-gradient-to-b from-blush via-cream to-cream pb-12 pt-[calc(var(--safe-top)+7rem)] sm:pb-16 sm:pt-[calc(var(--safe-top)+9rem)]">
       <div className="pointer-events-none absolute -right-24 -top-24 h-80 w-80 rounded-full bg-mustard/10 blur-[90px]" aria-hidden />
       <div className={`container-page relative ${centered ? "text-center" : ""}`}>
         <nav aria-label="Breadcrumb">

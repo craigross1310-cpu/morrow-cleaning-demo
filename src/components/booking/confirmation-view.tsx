@@ -290,7 +290,7 @@ function Detail({ label, value }: { label: string; value: string }) {
 
 function Shell({ children }: { children: ReactNode }) {
   return (
-    <div className="min-h-dvh bg-gradient-to-b from-blush via-cream to-cream pb-24 pt-28 sm:pt-36">
+    <div className="min-h-dvh bg-gradient-to-b from-blush via-cream to-cream pb-24 pt-[calc(var(--safe-top)+7rem)] sm:pt-[calc(var(--safe-top)+9rem)]">
       <div className="container-page">{children}</div>
     </div>
   );

@@ -14,7 +14,7 @@ const CARDS = [
 /** "Our standards" bento — the detailed version of the homepage benefits. */
 export function Standards() {
   return (
-    <section id="standards" aria-labelledby="standards-title" className="scroll-mt-24 py-24 sm:py-32">
+    <section id="standards" aria-labelledby="standards-title" className="scroll-mt-header py-24 sm:py-32">
       <div className="container-page">
         <SectionHeading
           id="standards-title"

@@ -35,10 +35,20 @@
   }
 }
 
+@utility scroll-mt-header {
+  scroll-margin-top: var(--header-space);
+}
+
 @layer base {
+  :root {
+    /* Height of the iPhone status bar / notch (0 elsewhere). */
+    --safe-top: env(safe-area-inset-top, 0px);
+    /* Space the floating header occupies, used for anchor offsets. */
+    --header-space: calc(var(--safe-top) + 5.5rem);
+  }
   html {
     scroll-behavior: smooth;
-    scroll-padding-top: 5.5rem;
+    scroll-padding-top: var(--header-space);
     -webkit-tap-highlight-color: transparent;
   }
   @media (prefers-reduced-motion: reduce) {

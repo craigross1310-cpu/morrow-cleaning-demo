@@ -143,7 +143,7 @@ export function BookingFlow() {
 
   return (
     <PageShell>
-      <div ref={topRef} className="scroll-mt-28" />
+      <div ref={topRef} className="scroll-mt-header" />
       <BookingSteps phase={phase} />
 
       <div className="mt-10 grid items-start gap-8 lg:grid-cols-[minmax(0,1fr)_24rem]">
@@ -328,7 +328,7 @@ export function BookingFlow() {
 
 function PageShell({ children }: { children: ReactNode }) {
   return (
-    <div className="min-h-dvh bg-gradient-to-b from-blush via-cream to-cream pb-24 pt-28 sm:pt-32">
+    <div className="min-h-dvh bg-gradient-to-b from-blush via-cream to-cream pb-24 pt-[calc(var(--safe-top)+7rem)] sm:pt-[calc(var(--safe-top)+8rem)]">
       <div className="container-page">{children}</div>
     </div>
   );

@@ -2,7 +2,7 @@ import { ButtonLink } from "@/components/ui/button";
 
 export default function NotFound() {
   return (
-    <div className="flex min-h-[80dvh] items-center bg-gradient-to-b from-blush to-cream pt-24">
+    <div className="flex min-h-[80dvh] items-center bg-gradient-to-b from-blush to-cream pt-[calc(var(--safe-top)+6rem)]">
       <div className="container-page text-center">
         <p className="font-display text-8xl text-mustard">404</p>
         <h1 className="heading-lg mt-4 text-4xl text-ink">This room&apos;s already spotless — and empty.</h1>
